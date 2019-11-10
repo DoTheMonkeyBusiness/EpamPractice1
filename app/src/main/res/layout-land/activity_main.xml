@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp">
+
+    <EditText
+        android:id="@+id/field1"
+        android:layout_width="wrap_content"
+        android:hint="@string/field1"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@id/layoutCenter"
+        android:ems="1"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/field2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/field2"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/layoutCenter"
+        android:ems="1"
+        android:inputType="number" />
+
+    <RadioButton
+        android:id="@+id/plusRadioButton"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@id/field1"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@id/layoutCenter"
+        android:text="@string/plus"
+        android:textSize="16sp" />
+
+    <RadioButton
+        android:id="@+id/minusRadioButton"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignBottom="@id/plusRadioButton"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/layoutCenter"
+        android:text="@string/minus"
+        android:textSize="16sp" />
+
+    <RadioButton
+        android:id="@+id/divideRadioButton"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@id/plusRadioButton"
+        android:layout_alignStart="@id/plusRadioButton"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@id/layoutCenter"
+        android:text="@string/divide"
+        android:textSize="16sp" />
+
+    <RadioButton
+        android:id="@+id/multiplyRadioButton"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@id/minusRadioButton"
+        android:layout_alignStart="@id/minusRadioButton"
+        android:layout_alignParentEnd="true"
+        android:text="@string/multiply"
+        android:textSize="16sp" />
+
+    <CheckBox
+        android:id="@+id/floatValuesCheckBox"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@id/divideRadioButton"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@id/layoutCenter"
+        android:checked="true"
+        android:text="@string/float_values"
+        android:textSize="16sp" />
+
+    <CheckBox
+        android:id="@+id/signedValuesCheckBox"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@id/floatValuesCheckBox"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@id/layoutCenter"
+        android:checked="true"
+        android:text="@string/signed_values"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/resultField"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@id/signedValuesCheckBox"
+        android:layout_alignParentBottom="true"
+        android:layout_toStartOf="@id/layoutCenter"
+        android:gravity="bottom"
+        android:hint="@string/result"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/clearButton"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_above="@id/calculateButton"
+        android:layout_toEndOf="@+id/layoutCenter"
+        android:text="@string/clear" />
+
+    <Button
+        android:id="@+id/calculateButton"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/layoutCenter"
+        android:text="@string/calculate" />
+
+
+    <View
+        android:id="@+id/layoutCenter"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
+</RelativeLayout>

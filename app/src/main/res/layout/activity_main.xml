@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp"
+    tools:context=".MainActivity">
+
+
+    <EditText
+        android:id="@+id/field1"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:ems="1"
+        android:hint="@string/field1"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/field2"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:ems="1"
+        android:hint="@string/field2"
+        android:inputType="number" />
+
+    <RadioButton
+        android:id="@+id/plusRadioButton"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="@string/plus"
+        android:textSize="16sp" />
+
+    <RadioButton
+        android:id="@+id/minusRadioButton"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="@string/minus"
+        android:textSize="16sp" />
+
+    <RadioButton
+        android:id="@+id/divideRadioButton"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="@string/divide"
+        android:textSize="16sp" />
+
+    <RadioButton
+        android:id="@+id/multiplyRadioButton"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="@string/multiply"
+        android:textSize="16sp" />
+
+    <CheckBox
+        android:id="@+id/floatValuesCheckBox"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:checked="true"
+        android:text="@string/float_values"
+        android:textSize="16sp" />
+
+    <CheckBox
+        android:id="@+id/signedValuesCheckBox"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:checked="true"
+        android:text="@string/signed_values"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/resultField"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:hint="@string/result"
+        android:gravity="center_vertical"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/clearButton"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="@string/clear" />
+
+    <Button
+        android:id="@+id/calculateButton"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="@string/result" />
+</LinearLayout>

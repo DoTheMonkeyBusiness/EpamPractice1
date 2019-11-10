@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">EpamPracticeFirst</string>
+    <string name="calculate">Calculate</string>
+    <string name="clear">Clear</string>
+    <string name="divide">Divide</string>
+    <string name="error">Oh shit, try again</string>
+    <string name="field1">Number 1</string>
+    <string name="field2">Number 2</string>
+    <string name="float_values">Use float numbers</string>
+    <string name="minus">Minus</string>
+    <string name="multiply">Multiply</string>
+    <string name="operation_not_found">Please, choose an operation</string>
+    <string name="plus">Plus</string>
+    <string name="result">Result</string>
+    <string name="signed_values">Use signed numbers</string>
+</resources>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">EpamPracticeFirst</string>
+    <string name="calculate">Вычислить</string>
+    <string name="clear">Очистить</string>
+    <string name="divide">Делить</string>
+    <string name="error">Произошел конфуз, попробуйте еще раз</string>
+    <string name="field1">Число 1</string>
+    <string name="field2">Число 2</string>
+    <string name="float_values">Использовать дробные числа</string>
+    <string name="minus">Минус</string>
+    <string name="multiply">Умножить</string>
+    <string name="operation_not_found">Выберите выполняемую операцию</string>
+    <string name="plus">Плюс</string>
+    <string name="result">Результат</string>
+    <string name="signed_values">Использовать знаковые числа</string>
+</resources>
