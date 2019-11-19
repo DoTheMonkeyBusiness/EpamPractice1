@@ -2,8 +2,12 @@
 <resources>
     <string name="app_name">EpamPracticeFirst</string>
     <string name="calculate">Вычислить</string>
+    <string name="clear_dialog_cancel">Отмена</string>
+    <string name="clear_dialog_confirm">ОК</string>
+    <string name="clear_dialog_text">Реально?</string>
     <string name="clear">Очистить</string>
     <string name="divide">Делить</string>
+    <string name="empty_fields">Заполните оба поля</string>
     <string name="error">Произошел конфуз, попробуйте еще раз</string>
     <string name="field1">Число 1</string>
     <string name="field2">Число 2</string>

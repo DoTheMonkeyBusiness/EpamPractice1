@@ -13,7 +13,7 @@
         android:layout_alignParentTop="true"
         android:layout_toStartOf="@id/layoutCenter"
         android:ems="1"
-        android:inputType="number" />
+        android:inputType="numberSigned|numberDecimal" />
 
     <EditText
         android:id="@+id/field2"
@@ -24,7 +24,7 @@
         android:layout_alignParentEnd="true"
         android:layout_toEndOf="@+id/layoutCenter"
         android:ems="1"
-        android:inputType="number" />
+        android:inputType="numberSigned|numberDecimal" />
 
     <RadioButton
         android:id="@+id/plusRadioButton"

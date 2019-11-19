@@ -3,7 +3,11 @@
     <string name="app_name">EpamPracticeFirst</string>
     <string name="calculate">Calculate</string>
     <string name="clear">Clear</string>
+    <string name="clear_dialog_cancel">Cancel</string>
+    <string name="clear_dialog_confirm">OK</string>
+    <string name="clear_dialog_text">Really nigga?</string>
     <string name="divide">Divide</string>
+    <string name="empty_fields">Fill in both fields</string>
     <string name="error">Oh shit, try again</string>
     <string name="field1">Number 1</string>
     <string name="field2">Number 2</string>
