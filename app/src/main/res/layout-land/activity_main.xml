@@ -7,23 +7,23 @@
     <EditText
         android:id="@+id/field1"
         android:layout_width="wrap_content"
-        android:hint="@string/field1"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_toStartOf="@id/layoutCenter"
         android:ems="1"
+        android:hint="@string/field1"
         android:inputType="numberSigned|numberDecimal" />
 
     <EditText
         android:id="@+id/field2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/field2"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_toEndOf="@+id/layoutCenter"
         android:ems="1"
+        android:hint="@string/field2"
         android:inputType="numberSigned|numberDecimal" />
 
     <RadioButton

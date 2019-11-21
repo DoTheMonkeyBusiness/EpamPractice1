@@ -1,15 +1,24 @@
 package com.nasalevich.epampracticefirst
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.widget.EditText
 import android.widget.RadioButton
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
+private const val IS_DIALOG_SHOWN_KEY = "IS_DIALOG_SHOWN"
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var signButtons: List<RadioButton>
+
+    private var dialog: AlertDialog? = null
+    private var isDialogShown: Boolean = false
+
+    private val handler = Handler(Looper.getMainLooper())
 
     private val selectedButton: RadioButton?
         get() {
@@ -22,9 +31,25 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        initDialog()
         initSignButtons()
+        initFloatValuesCheckBox()
+        initSignedValuesCheckBox()
         initClearButton()
         initCalculateButton()
+
+        if (savedInstanceState != null
+            && savedInstanceState.containsKey(IS_DIALOG_SHOWN_KEY)
+            && savedInstanceState.getBoolean(IS_DIALOG_SHOWN_KEY)
+        ) {
+            dialog?.show()
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+
+        outState?.putBoolean(IS_DIALOG_SHOWN_KEY, isDialogShown)
     }
 
     private fun initSignButtons() {
@@ -40,40 +65,92 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun initFloatValuesCheckBox() {
+        floatValuesCheckBox.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                if (signedValuesCheckBox.isChecked) {
+                    field1.inputType = FLOAT_VALUES or SIGNED_VALUES
+                    field2.inputType = FLOAT_VALUES or SIGNED_VALUES
+                } else {
+                    field1.inputType = FLOAT_VALUES
+                    field2.inputType = FLOAT_VALUES
+                }
+            } else {
+                if (signedValuesCheckBox.isChecked) {
+                    field1.inputType = SIGNED_VALUES
+                    field2.inputType = SIGNED_VALUES
+                } else {
+                    field1.inputType = NUMBER_VALUES
+                    field2.inputType = NUMBER_VALUES
+                }
+                field1.removeSign(DOT)
+                field2.removeSign(DOT)
+            }
+        }
+    }
+
+    private fun initSignedValuesCheckBox() {
+        signedValuesCheckBox.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                if (floatValuesCheckBox.isChecked) {
+                    field1.inputType = FLOAT_VALUES or SIGNED_VALUES
+                    field2.inputType = FLOAT_VALUES or SIGNED_VALUES
+                } else {
+                    field1.inputType = SIGNED_VALUES
+                    field2.inputType = SIGNED_VALUES
+                }
+            } else {
+                if (floatValuesCheckBox.isChecked) {
+                    field1.inputType = FLOAT_VALUES
+                    field2.inputType = FLOAT_VALUES
+                } else {
+                    field1.inputType = NUMBER_VALUES
+                    field2.inputType = NUMBER_VALUES
+                }
+                field1.removeSign(MINUS)
+                field2.removeSign(MINUS)
+            }
+        }
+    }
+
 
     private fun initClearButton() {
-        val dialog = AlertDialog.Builder(this@MainActivity)
+        clearButton.setOnClickListener {
+            isDialogShown = true
+            dialog?.show()
+        }
+    }
+
+    private fun initCalculateButton() {
+        calculateButton.setOnClickListener {
+            val firstField = field1.text?.toString()
+            val secondField = field2.text?.toString()
+            val selectedButton = selectedButton
+
+            when {
+                firstField.isNullOrEmpty()
+                        || secondField.isNullOrEmpty() -> showLongToast(R.string.empty_fields)
+                selectedButton == null -> showLongToast(R.string.operation_not_found)
+                else -> calculate(firstField.toDouble(), secondField.toDouble(), selectedButton)
+            }
+        }
+    }
+
+    private fun initDialog() {
+        dialog = AlertDialog.Builder(this@MainActivity)
             .setTitle(R.string.clear_dialog_text)
             .setPositiveButton(
                 R.string.clear_dialog_confirm
             ) { _, _ ->
+                isDialogShown = false
                 clearAllFields()
             }
             .setNegativeButton(
                 R.string.clear_dialog_cancel
             ) { _, _ ->
-
+                isDialogShown = false
             }
             .create()
-
-        clearButton.setOnClickListener {
-            dialog.show()
-        }
-    }
-
-    private fun initCalculateButton() {
-        val firstField = field1.text?.toString()
-        val secondField = field2.text?.toString()
-        val selectedButton = selectedButton
-
-        calculateButton.setOnClickListener {
-            when {
-                firstField.isNullOrEmpty()
-                        || secondField.isNullOrEmpty() -> this@MainActivity.showLongToast(R.string.empty_fields)
-                selectedButton == null -> this@MainActivity.showLongToast(R.string.operation_not_found)
-                else -> calculate(firstField, secondField, selectedButton)
-            }
-        }
     }
 
     private fun clearAllFields() {
@@ -83,8 +160,24 @@ class MainActivity : AppCompatActivity() {
         resultField.text = EMPTY
     }
 
-    private fun calculate(firstField: String, secondField: String, selectedButton: RadioButton){
+    private fun calculate(firstField: Double, secondField: Double, selectedButton: RadioButton) {
+        val result = when (selectedButton.text) {
+            getString(R.string.plus) -> sum(firstField, secondField)
+            getString(R.string.minus) -> subtraction(firstField, secondField)
+            getString(R.string.divide) -> division(firstField, secondField)
+            getString(R.string.multiply) -> multiplication(firstField, secondField)
+            else -> EMPTY
+        }
 
+        if (result == INFINITY) {
+            divisionByZeroProtocol()
+        } else {
+            resultField.text = result
+        }
+    }
+
+    private fun EditText.removeSign(sign: String) {
+        setText(text.toString().replaceFirst(sign, EMPTY))
     }
 
     private fun RadioButton.initClickListener() {
@@ -95,5 +188,18 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun divisionByZeroProtocol() {
+        showLongToast(R.string.division_by_zero)
+
+        Thread {
+            Thread.sleep(1000)
+            handler.post {
+                Runnable {
+                    finishAffinity()
+                }.run()
+            }
+        }.start()
     }
 }

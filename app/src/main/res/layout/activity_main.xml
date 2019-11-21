@@ -12,9 +12,8 @@
         android:id="@+id/field1"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:ems="1"
         android:hint="@string/field1"
-        android:inputType="number" />
+        android:inputType="numberSigned|numberDecimal" />
 
     <EditText
         android:id="@+id/field2"
@@ -22,7 +21,7 @@
         android:layout_height="48dp"
         android:ems="1"
         android:hint="@string/field2"
-        android:inputType="number" />
+        android:inputType="numberSigned|numberDecimal" />
 
     <RadioButton
         android:id="@+id/plusRadioButton"
@@ -73,8 +72,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:hint="@string/result"
         android:gravity="center_vertical"
+        android:hint="@string/result"
         android:textSize="16sp" />
 
     <Button

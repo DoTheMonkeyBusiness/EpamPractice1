@@ -7,6 +7,7 @@
     <string name="clear_dialog_text">Реально?</string>
     <string name="clear">Очистить</string>
     <string name="divide">Делить</string>
+    <string name="division_by_zero">если ты делишь на 0, то тебе уже ничем не помочь</string>
     <string name="empty_fields">Заполните оба поля</string>
     <string name="error">Произошел конфуз, попробуйте еще раз</string>
     <string name="field1">Число 1</string>

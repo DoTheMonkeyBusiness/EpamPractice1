@@ -7,6 +7,7 @@
     <string name="clear_dialog_confirm">OK</string>
     <string name="clear_dialog_text">Really nigga?</string>
     <string name="divide">Divide</string>
+    <string name="division_by_zero">you divide by 0, even I won’t help you, sorry</string>
     <string name="empty_fields">Fill in both fields</string>
     <string name="error">Oh shit, try again</string>
     <string name="field1">Number 1</string>
