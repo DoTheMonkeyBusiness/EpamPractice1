@@ -77,12 +77,6 @@
         android:textSize="16sp" />
 
     <Button
-        android:id="@+id/clearButton"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:text="@string/clear" />
-
-    <Button
         android:id="@+id/calculateButton"
         android:layout_width="match_parent"
         android:layout_height="48dp"

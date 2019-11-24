@@ -3,6 +3,8 @@ package com.nasalevich.epampracticefirst
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.EditText
 import android.widget.RadioButton
 import androidx.appcompat.app.AlertDialog
@@ -35,7 +37,6 @@ class MainActivity : AppCompatActivity() {
         initSignButtons()
         initFloatValuesCheckBox()
         initSignedValuesCheckBox()
-        initClearButton()
         initCalculateButton()
 
         if (savedInstanceState != null
@@ -50,6 +51,23 @@ class MainActivity : AppCompatActivity() {
         super.onSaveInstanceState(outState)
 
         outState?.putBoolean(IS_DIALOG_SHOWN_KEY, isDialogShown)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?) = when (item?.itemId) {
+        R.id.menu_clear -> {
+            isDialogShown = true
+            dialog?.show()
+
+            true
+        }
+
+        else -> super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+
+        return true
     }
 
     private fun initSignButtons() {
@@ -113,14 +131,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-    private fun initClearButton() {
-        clearButton.setOnClickListener {
-            isDialogShown = true
-            dialog?.show()
-        }
-    }
-
     private fun initCalculateButton() {
         calculateButton.setOnClickListener {
             val firstField = field1.text?.toString()
@@ -177,7 +187,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun EditText.removeSign(sign: String) {
-        setText(text.toString().replaceFirst(sign, EMPTY))
+        when (sign) {
+            DOT -> {
+                val str = text
+                val indexOfDot = str.indexOf(sign)
+
+                if (indexOfDot != -1) {
+                    setText(str.substring(0, indexOfDot))
+                }
+            }
+
+            MINUS -> setText(text.toString().replaceFirst(sign, EMPTY))
+        }
     }
 
     private fun RadioButton.initClickListener() {
