@@ -102,6 +102,7 @@
 
     <Button
         android:id="@+id/calculateButton"
+        style="@style/CustomButton"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_alignParentEnd="true"
