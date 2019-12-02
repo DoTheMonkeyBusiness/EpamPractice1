@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 private const val IS_DIALOG_SHOWN_KEY = "IS_DIALOG_SHOWN"
+private const val RESULT_KEY = "RESULT_SHOWN"
 
 class MainActivity : AppCompatActivity() {
 
@@ -39,11 +40,15 @@ class MainActivity : AppCompatActivity() {
         initSignedValuesCheckBox()
         initCalculateButton()
 
-        if (savedInstanceState != null
-            && savedInstanceState.containsKey(IS_DIALOG_SHOWN_KEY)
-            && savedInstanceState.getBoolean(IS_DIALOG_SHOWN_KEY)
-        ) {
-            dialog?.show()
+        if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey(IS_DIALOG_SHOWN_KEY)
+                    && savedInstanceState.getBoolean(IS_DIALOG_SHOWN_KEY)) {
+                dialog?.show()
+            }
+
+            if (savedInstanceState.containsKey(RESULT_KEY)){
+                resultField.text = savedInstanceState.getCharSequence(RESULT_KEY)
+            }
         }
     }
 
@@ -51,6 +56,7 @@ class MainActivity : AppCompatActivity() {
         super.onSaveInstanceState(outState)
 
         outState?.putBoolean(IS_DIALOG_SHOWN_KEY, isDialogShown)
+        outState?.putCharSequence(RESULT_KEY, resultField.text)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?) = when (item?.itemId) {
@@ -138,8 +144,8 @@ class MainActivity : AppCompatActivity() {
             val selectedButton = selectedButton
 
             when {
-                firstField.isNullOrEmpty()
-                        || secondField.isNullOrEmpty() -> showLongToast(R.string.empty_fields)
+                firstField.isNullOrBlank()
+                        || secondField.isNullOrBlank() -> showLongToast(R.string.empty_fields)
                 selectedButton == null -> showLongToast(R.string.operation_not_found)
                 else -> calculate(firstField.toDouble(), secondField.toDouble(), selectedButton)
             }
