@@ -42,11 +42,12 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState != null) {
             if (savedInstanceState.containsKey(IS_DIALOG_SHOWN_KEY)
-                    && savedInstanceState.getBoolean(IS_DIALOG_SHOWN_KEY)) {
+                && savedInstanceState.getBoolean(IS_DIALOG_SHOWN_KEY)
+            ) {
                 dialog?.show()
             }
 
-            if (savedInstanceState.containsKey(RESULT_KEY)){
+            if (savedInstanceState.containsKey(RESULT_KEY)) {
                 resultField.text = savedInstanceState.getCharSequence(RESULT_KEY)
             }
         }
@@ -55,8 +56,10 @@ class MainActivity : AppCompatActivity() {
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
 
-        outState?.putBoolean(IS_DIALOG_SHOWN_KEY, isDialogShown)
-        outState?.putCharSequence(RESULT_KEY, resultField.text)
+        outState?.also {
+            it.putBoolean(IS_DIALOG_SHOWN_KEY, isDialogShown)
+            it.putCharSequence(RESULT_KEY, resultField.text)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem?) = when (item?.itemId) {
