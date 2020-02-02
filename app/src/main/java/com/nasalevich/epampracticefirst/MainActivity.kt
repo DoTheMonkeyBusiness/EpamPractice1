@@ -7,19 +7,15 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.EditText
 import android.widget.RadioButton
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
-private const val IS_DIALOG_SHOWN_KEY = "IS_DIALOG_SHOWN"
+private const val DIALOG_KEY = "dialog"
 private const val RESULT_KEY = "RESULT_SHOWN"
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MessageDialog.MessageDialogCallback {
 
     private lateinit var signButtons: List<RadioButton>
-
-    private var dialog: AlertDialog? = null
-    private var isDialogShown: Boolean = false
 
     private val handler = Handler(Looper.getMainLooper())
 
@@ -34,19 +30,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        initDialog()
         initSignButtons()
         initFloatValuesCheckBox()
         initSignedValuesCheckBox()
         initCalculateButton()
 
         if (savedInstanceState != null) {
-            if (savedInstanceState.containsKey(IS_DIALOG_SHOWN_KEY)
-                && savedInstanceState.getBoolean(IS_DIALOG_SHOWN_KEY)
-            ) {
-                dialog?.show()
-            }
-
             if (savedInstanceState.containsKey(RESULT_KEY)) {
                 resultField.text = savedInstanceState.getCharSequence(RESULT_KEY)
             }
@@ -57,15 +46,13 @@ class MainActivity : AppCompatActivity() {
         super.onSaveInstanceState(outState)
 
         outState?.also {
-            it.putBoolean(IS_DIALOG_SHOWN_KEY, isDialogShown)
             it.putCharSequence(RESULT_KEY, resultField.text)
         }
     }
 
     override fun onOptionsItemSelected(item: MenuItem?) = when (item?.itemId) {
         R.id.menu_clear -> {
-            isDialogShown = true
-            dialog?.show()
+            MessageDialog().show(supportFragmentManager, DIALOG_KEY)
 
             true
         }
@@ -155,23 +142,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun initDialog() {
-        dialog = AlertDialog.Builder(this@MainActivity)
-            .setTitle(R.string.clear_dialog_text)
-            .setPositiveButton(
-                R.string.clear_dialog_confirm
-            ) { _, _ ->
-                isDialogShown = false
-                clearAllFields()
-            }
-            .setNegativeButton(
-                R.string.clear_dialog_cancel
-            ) { _, _ ->
-                isDialogShown = false
-            }
-            .create()
-    }
-
     private fun clearAllFields() {
         field1.setText(EMPTY)
         field2.setText(EMPTY)
@@ -226,10 +196,12 @@ class MainActivity : AppCompatActivity() {
         Thread {
             Thread.sleep(1000)
             handler.post {
-                Runnable {
-                    finishAffinity()
-                }.run()
+                finishAffinity()
             }
         }.start()
+    }
+
+    override fun onPositiveClick() {
+        clearAllFields()
     }
 }
